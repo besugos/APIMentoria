@@ -1,5 +1,7 @@
 from fastapi import APIRouter
 
+from models.models import Employee
+
 router = APIRouter(
     prefix="/employee",
     tags=["Employee"],
@@ -15,3 +17,9 @@ async def get_employees():
 @router.get("/{id}")
 async def get_employee_by_id():
     return {"msg": "get employee by id route"}
+
+
+@router.post("/")
+async def create_employee(employee: Employee):
+    return {"msg": "create employee route"}
+

@@ -23,6 +23,9 @@ class Employee(BaseModel):
     children_names: str
     marital_status: str
 
+    class Config:
+        orm_mode = True
+
 
 class Dayoff(BaseModel):
     dayoff_id: int = None

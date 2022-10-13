@@ -1,7 +1,10 @@
 from sqlalchemy import Column, Integer, String, Date, Time, Boolean
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 
-class Employee():
+class Employee(Base):
     __tablename__ = 'employee'
 
     employee_id = Column(Integer, primary_key=True, index=True)
@@ -22,7 +25,7 @@ class Employee():
     marital_status = Column(String)
 
 
-class Dayoff():
+class Dayoff(Base):
     __tablename__ = 'dayoff'
 
     dayoff_id = Column(Integer, primary_key=True, index=True)

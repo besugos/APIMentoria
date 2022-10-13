@@ -12,7 +12,7 @@ class EmployeePersistency():
                                          last_name=employee.last_name,
                                          cpf=employee.cpf,
                                          email=employee.email,
-                                         password=employee.passworde,
+                                         password=employee.password,
                                          zipcode=employee.zipcode,
                                          birthdate=employee.birthdate,
                                          street=employee.street,

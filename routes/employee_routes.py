@@ -30,3 +30,8 @@ async def create_employee(employee: Employee, db: Session = Depends(get_db)):
     created_employee = EmployeePersistency(db).create(employee)
     return created_employee
 
+
+@router.delete("/{employee_id}")
+async def get_employee_by_id(employee_id: int,  db: Session = Depends(get_db)):
+    employee = EmployeePersistency(db).delete(employee_id)
+    return {"msg": "Deleted successfully"}

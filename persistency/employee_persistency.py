@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from sqlalchemy.orm import Session
 from models import models, db_models
 
@@ -41,5 +41,8 @@ class EmployeePersistency():
     def patch(self):
         pass
 
-    def delete(self):
-        pass
+    def delete(self, employee_id: int):
+        statement = delete(db_models.Employee).where(db_models.Employee.employee_id == employee_id)
+        self.db.execute(statement)
+        self.db.commit()
+

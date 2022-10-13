@@ -1,3 +1,4 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from models import models, db_models
 
@@ -32,8 +33,10 @@ class EmployeePersistency():
         employees = self.db.query(db_models.Employee).all()
         return employees
 
-    def read_by_id(self):
-        pass
+    def read_by_id(self, employee_id: int):
+        statement = select(db_models.Employee).filter_by(employee_id=employee_id)
+        employee = self.db.execute(statement).one()
+        return employee
 
     def patch(self):
         pass

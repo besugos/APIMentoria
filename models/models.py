@@ -40,3 +40,6 @@ class Dayoff(BaseModel):
     has_substitute: bool
     substitute: str
     pending_work: str
+
+    class Config:
+        orm_mode = True

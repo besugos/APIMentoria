@@ -1,4 +1,4 @@
-from sqlalchemy import select, delete
+from sqlalchemy import select, delete, update
 from sqlalchemy.orm import Session
 from models import models, db_models
 
@@ -38,11 +38,27 @@ class EmployeePersistency():
         employee = self.db.execute(statement).one()
         return employee
 
-    def patch(self):
-        pass
+    def patch(self, employee: models.Employee):
+        update_stmt = update(db_models.Employee).where(db_models.Employee.employee_id == employee.employee_id).values(
+            first_name=employee.first_name,
+            last_name=employee.last_name,
+            cpf=employee.cpf,
+            email=employee.email,
+            password=employee.password,
+            zipcode=employee.zipcode,
+            birthdate=employee.birthdate,
+            street=employee.street,
+            number=employee.number,
+            district=employee.district,
+            city=employee.city,
+            state=employee.state,
+            children_amount=employee.children_amount,
+            children_names=employee.children_names,
+            marital_status=employee.marital_status)
+        self.db.execute(update_stmt)
+        self.db.commit()
 
     def delete(self, employee_id: int):
         statement = delete(db_models.Employee).where(db_models.Employee.employee_id == employee_id)
         self.db.execute(statement)
         self.db.commit()
-

@@ -38,8 +38,8 @@ class EmployeePersistency():
         employee = self.db.execute(statement).one()
         return employee
 
-    def patch(self, employee: models.Employee):
-        update_stmt = update(db_models.Employee).where(db_models.Employee.employee_id == employee.employee_id).values(
+    def patch(self, employee: models.Employee, employee_id: int):
+        update_stmt = update(db_models.Employee).where(db_models.Employee.employee_id == employee_id).values(
             first_name=employee.first_name,
             last_name=employee.last_name,
             cpf=employee.cpf,

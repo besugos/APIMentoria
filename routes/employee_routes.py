@@ -37,7 +37,7 @@ async def get_employee_by_id(employee_id: int,  db: Session = Depends(get_db)):
     return {"msg": "Deleted successfully"}
 
 
-@router.put("/", status_code=status.HTTP_204_NO_CONTENT)
-async def edit_employee(employee: Employee, db: Session = Depends(get_db)):
-    EmployeePersistency(db).patch(employee)
+@router.patch("/{employee_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def edit_employee(employee: Employee, employee_id: int, db: Session = Depends(get_db)):
+    EmployeePersistency(db).patch(employee, employee_id)
     return {"msg": "Edit successfully"}

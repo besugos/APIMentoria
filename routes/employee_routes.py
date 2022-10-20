@@ -39,7 +39,7 @@ async def get_employee_by_id(employee_id: int,  db: Session = Depends(get_db)):
 
 
 @router.patch("/{employee_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def edit_employee(employee: Employee, employee_id: int, db: Session = Depends(get_db)):
+async def edit_employee(employee: Employee, employee_id: int, db: Session = Depends(get_db), user=Depends(get_user_info)):
     EmployeePersistency(db).patch(employee, employee_id)
     return {"msg": "Edit successfully"}
 

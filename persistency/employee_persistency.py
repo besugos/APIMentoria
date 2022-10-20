@@ -1,6 +1,7 @@
 from sqlalchemy import select, delete, update
 from sqlalchemy.orm import Session
 from models import models, db_models
+from utils.authentication_utils import create_hash
 
 
 class EmployeePersistency():
@@ -24,6 +25,8 @@ class EmployeePersistency():
                                          children_amount=employee.children_amount,
                                          children_names=employee.children_names,
                                          marital_status=employee.marital_status)
+
+        db_employee.password = create_hash(db_employee.password)
         self.db.add(db_employee)
         self.db.commit()
         self.db.refresh(db_employee)
@@ -37,6 +40,11 @@ class EmployeePersistency():
         statement = select(db_models.Employee).filter_by(employee_id=employee_id)
         employee = self.db.execute(statement).one()
         return employee
+
+    def read_by_username(self, username: str):
+        statement = select(db_models.Employee).filter_by(email=username)
+        employee = self.db.execute(statement).one()
+        return employee['Employee']
 
     def patch(self, employee: models.Employee, employee_id: int):
         update_stmt = update(db_models.Employee).where(db_models.Employee.employee_id == employee_id).values(

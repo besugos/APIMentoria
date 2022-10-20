@@ -43,3 +43,8 @@ class Dayoff(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class User(BaseModel):
+    email: str
+    password: str
